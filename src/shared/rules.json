@@ -1,0 +1,35 @@
+{
+  "passStartSalary": 200,
+  "jailFine": 50,
+  "maxJailTurns": 3,
+  "houseCost": 150,
+  "hotelCost": 300,
+  "maxHouses": 4,
+  "hotelRequiresFourHouses": true,
+  "baseRentFactor": 0.1,
+  "rentMultipliers": [
+    0.5,
+    1.4,
+    3.6,
+    5.2,
+    6.8
+  ],
+  "rentRounding": 10,
+  "harborRents": [
+    25,
+    50,
+    100,
+    200
+  ],
+  "utilityMultipliers": [
+    4,
+    10
+  ],
+  "jailTileIndex": 10,
+  "goToDetentionIndex": 30,
+  "boardSize": 40,
+  "auctionFirstWindowMs": 12000,
+  "auctionBidWindowMs": 10000,
+  "auctionMinBid": 10,
+  "auctionBidStep": 10
+}

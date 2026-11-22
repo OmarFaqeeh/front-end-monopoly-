@@ -1,0 +1,761 @@
+{
+  "common": {
+    "appName": "Deal Rush",
+    "tagline": "Trade, build and outsmart your friends.",
+    "placeholder": "TODO"
+  },
+  "lobby": {
+    "title": "Lobby",
+    "placeholder": "TODO"
+  },
+  "room": {
+    "title": "Room",
+    "loader": {
+      "laying": "Laying out the board",
+      "shuffling": "Shuffling the cards",
+      "seat": "Setting your seat",
+      "codeLabel": "Room code",
+      "progress": "Loading the room"
+    },
+    "header": {
+      "soundOn": "Mute sound",
+      "soundOff": "Unmute sound",
+      "help": "How to play",
+      "leave": "Leave room",
+      "motionOn": "Animations on (click for reduced)",
+      "motionOff": "Reduced animations (click for full)"
+    },
+    "share": {
+      "title": "Share this room",
+      "copy": "Copy",
+      "copied": "Copied",
+      "urlLabel": "Room link",
+      "linkTitle": "Invite link",
+      "idTitle": "Room ID",
+      "copyId": "Copy ID",
+      "digit": "Room ID digit {n}"
+    },
+    "chat": {
+      "title": "Chat",
+      "empty": "No messages yet",
+      "joinToChat": "Join the room to chat",
+      "placeholder": "Write a message",
+      "send": "Send message",
+      "rateLimited": "You are sending messages too fast. Wait a few seconds.",
+      "failed": "Message not sent. Try again."
+    },
+    "status": {
+      "waiting": "Waiting for players"
+    },
+    "players": {
+      "title": "Players",
+      "host": "Host",
+      "change": "Change appearance",
+      "emptySeat": "Choose your character to take a seat",
+      "you": "You",
+      "bot": "Bot",
+      "removeBot": "Remove bot",
+      "removeAria": "Remove {name}",
+      "botJoins": "A bot joins in {n}s"
+    },
+    "picker": {
+      "title": "Choose your character",
+      "join": "Join room",
+      "taken": "Taken",
+      "group": "Characters"
+    },
+    "hint": {
+      "waiting": "Waiting for players ({count}/{max})"
+    },
+    "start": "Start game",
+    "joined": "Joined room {code}",
+    "settings": {
+      "title": "Settings",
+      "locked": "Choose your character to unlock the settings",
+      "hostOnly": "Only the host can change the settings",
+      "gameTitle": "Game settings",
+      "rulesTitle": "Gameplay rules",
+      "beta": "Beta",
+      "comingSoon": "Coming soon",
+      "classic": "Classic",
+      "changeBoard": "Change board",
+      "on": "On",
+      "off": "Off",
+      "items": {
+        "maxPlayers": {
+          "title": "Maximum players",
+          "desc": "How many players can sit at the table."
+        },
+        "allowBots": {
+          "title": "Allow bots",
+          "desc": "Bots fill empty seats when the room needs players."
+        },
+        "boardMap": {
+          "title": "Board",
+          "desc": "Choose the cities and sets on the board."
+        },
+        "doubleRentSets": {
+          "title": "Double rent on full sets",
+          "desc": "Owning every property in a color set doubles its base rent."
+        },
+        "oasisJackpot": {
+          "title": "Oasis jackpot",
+          "desc": "Taxes and bank payments pool up and go to whoever lands on the Oasis."
+        },
+        "auctions": {
+          "title": "Auctions",
+          "desc": "If a player declines to buy, the property is sold to the highest bidder."
+        },
+        "noRentInDetention": {
+          "title": "No rent from detained owners",
+          "desc": "Owners held in detention do not collect rent."
+        },
+        "mortgage": {
+          "title": "Mortgage",
+          "desc": "Mortgage a property for half its price; mortgaged properties collect no rent."
+        },
+        "evenBuild": {
+          "title": "Even building",
+          "desc": "Build and sell houses evenly across a color set."
+        },
+        "startingCash": {
+          "title": "Starting cash",
+          "desc": "How much money every player begins with."
+        }
+      },
+      "lockedInGame": "Rules are locked once the game starts"
+    },
+    "rollDice": "Roll the dice",
+    "diceLabel": "Dice showing {a} and {b}",
+    "characters": {
+      "c01": "Character 1",
+      "c02": "Character 2",
+      "c03": "Character 3",
+      "c04": "Character 4",
+      "c05": "Character 5",
+      "c06": "Character 6",
+      "c07": "Character 7",
+      "c08": "Character 8",
+      "c09": "Character 9",
+      "c10": "Character 10",
+      "c11": "Character 11",
+      "c12": "Character 12"
+    },
+    "connecting": "Connecting...",
+    "countdown": "Room closes in {time} if nobody joins",
+    "name": {
+      "title": "What should we call you?",
+      "subtitle": "Pick the name other players will see.",
+      "label": "Your nickname",
+      "placeholder": "Your nickname",
+      "continue": "Continue",
+      "joining": "Joining..."
+    },
+    "errorScreen": {
+      "back": "Back to home"
+    },
+    "noCharacter": "Choosing a character"
+  },
+  "game": {
+    "title": "Game",
+    "turn": {
+      "yours": "Your turn",
+      "of": "{name}'s turn",
+      "waitingRoll": "Waiting for {name} to roll"
+    },
+    "roll": "Roll the dice",
+    "youRolled": "You rolled {total}",
+    "rolled": "{name} rolled {total}",
+    "sum": "{a} + {b}",
+    "buy": "Buy for {price}",
+    "skip": "Skip",
+    "noCash": "Not enough cash",
+    "deciding": "{name} is deciding",
+    "jail": {
+      "pay": "Pay {fine} and leave",
+      "stay": "Stay in detention",
+      "mustPay": "You must pay to leave after 3 turns",
+      "waiting": "{name} is in detention"
+    },
+    "waitingForHost": "Waiting for the host to start",
+    "cash": "Cash of {name}",
+    "bankruptBadge": "Bankrupt",
+    "toastBankrupt": "{name} went bankrupt",
+    "over": {
+      "wins": "{name} wins!",
+      "back": "Back to home",
+      "label": "Game over"
+    },
+    "deck": {
+      "fortune": "Fortune",
+      "vault": "Vault"
+    },
+    "card": {
+      "gain": "Collect {amount}",
+      "loss": "Pay {amount}",
+      "label": "{deck} card"
+    },
+    "cards": {
+      "fortune": {
+        "F01": "A sandstorm delays your caravan. Pay $50.",
+        "F02": "A rare coin sells at auction. Collect $120.",
+        "F03": "A lucky day at the market. Collect $60.",
+        "F04": "Your ship needs repairs. Pay $100.",
+        "F05": "A friend repays an old loan. Collect $80.",
+        "F06": "You overspend on souvenirs. Pay $70.",
+        "F07": "A tourist tips you generously. Collect $40.",
+        "F08": "A fine for a late delivery. Pay $30.",
+        "F09": "A treasure map pays off. Collect $150.",
+        "F10": "Storm damage to your warehouse. Pay $120.",
+        "F11": "A festival boosts your sales. Collect $90.",
+        "F12": "A bad exchange rate costs you. Pay $40."
+      },
+      "vault": {
+        "V01": "Bank error in your favor. Collect $200.",
+        "V02": "A tax refund arrives. Collect $50.",
+        "V03": "Your insurance premium is due. Pay $60.",
+        "V04": "An inheritance from a distant relative. Collect $100.",
+        "V05": "A repair bill for the shop. Pay $50.",
+        "V06": "You win a small prize. Collect $30.",
+        "V07": "Annual license renewal. Pay $80.",
+        "V08": "You sell old equipment. Collect $70.",
+        "V09": "Repair the community well. Pay $40.",
+        "V10": "Your savings earn interest. Collect $25.",
+        "V11": "A birthday gift from the bank. Collect $45.",
+        "V12": "City cleaning fee. Pay $35."
+      }
+    },
+    "build": {
+      "house": "Build a house ({cost})",
+      "hotel": "Build a hotel ({cost})",
+      "heading": "Build",
+      "ownedBy": "Owned by {name}",
+      "hints": {
+        "SET_INCOMPLETE": "Own every property of this country to build",
+        "HOTEL_NEEDS_4_HOUSES": "A hotel needs 4 houses",
+        "MAX_LEVEL": "Maximum level reached",
+        "INSUFFICIENT_FUNDS": "Not enough cash",
+        "NOT_YOUR_TURN": "Wait for your turn",
+        "WRONG_PHASE": "You cannot build right now",
+        "UNEVEN_BUILD": "Build evenly: build on the lowest-level property of the set first",
+        "GROUP_MORTGAGED": "A mortgaged property blocks building on its whole set"
+      }
+    },
+    "system": {
+      "bought": "{name} bought {tile} for {amount}",
+      "rent": "{from} paid {amount} rent to {to}",
+      "tax": "{name} paid {amount} tax",
+      "card": "{name} drew a {deck} card",
+      "jail": "{name} was sent to detention",
+      "builtHouse": "{name} built a house on {tile}",
+      "builtHotel": "{name} built a hotel on {tile}",
+      "start": "{name} collected {amount} for passing Start",
+      "jailPaid": "{name} paid {amount} to leave detention",
+      "bankrupt": "{name} went bankrupt",
+      "afkRemoved": "{name} was removed for inactivity.{count, plural, =0 {} one { 1 property is available again} other { # properties are available again}}",
+      "tradeOffer": "{from} sent a trade offer to {to}",
+      "tradeAccepted": "{to} accepted the offer from {from}",
+      "tradeRejected": "{to} declined the offer from {from}",
+      "tradeCancelled": "{from} cancelled the offer to {to}",
+      "auctionWon": "{name} won the auction for {tile} at {amount}",
+      "oasis": "{name} collected the Oasis jackpot of {amount}",
+      "mortgaged": "{name} mortgaged {tile}",
+      "unmortgaged": "{name} unmortgaged {tile}",
+      "rentWaivedDetention": "{name} collects no rent while in detention",
+      "rentWaivedMortgaged": "{tile} is mortgaged: no rent",
+      "botJoined": "{name} (bot) joined",
+      "botLeft": "{name} (bot) left",
+      "botMadeRoom": "{name} left to make room"
+    },
+    "money": {
+      "gained": "You gained",
+      "lost": "You lost",
+      "start": "Salary for passing Start",
+      "rent_in": "Rent from {other}",
+      "rent_out": "Rent to {other}",
+      "tax": "Tax",
+      "card": "Card",
+      "buy": "Purchase",
+      "build": "Building",
+      "jail_fine": "Detention fine",
+      "bankruptcy_in": "Payment from {other}",
+      "auction": "Auction",
+      "oasis": "Oasis jackpot",
+      "mortgage": "Mortgage",
+      "unmortgage": "Unmortgage",
+      "afk_removed": "Removed for inactivity"
+    },
+    "withdraw": {
+      "button": "Withdraw",
+      "title": "Withdraw from the game?",
+      "body": "You lose all your properties and your cash, and the game goes on without you.",
+      "confirm": "Yes, withdraw",
+      "keep": "Keep playing",
+      "done": "You withdrew from the game"
+    }
+  },
+  "board": {
+    "label": "Game board",
+    "tiles": {
+      "t00": "Start",
+      "t01": "Petra",
+      "t02": "Vault",
+      "t03": "Wadi Rum",
+      "t04": "City tax",
+      "t05": "Aqaba Harbor",
+      "t06": "Patagonia",
+      "t07": "Fortune",
+      "t08": "Buenos Aires",
+      "t09": "Iguazú Falls",
+      "t10": "Detention",
+      "t11": "Luxor",
+      "t12": "Solar Grid",
+      "t13": "Alexandria",
+      "t14": "Cairo",
+      "t15": "Valencia Harbor",
+      "t16": "Antalya",
+      "t17": "Vault",
+      "t18": "Cappadocia",
+      "t19": "Istanbul",
+      "t20": "Oasis",
+      "t21": "Seville",
+      "t22": "Fortune",
+      "t23": "Barcelona",
+      "t24": "Madrid",
+      "t25": "Yokohama Harbor",
+      "t26": "Kyoto",
+      "t27": "Osaka",
+      "t28": "Desalination Plant",
+      "t29": "Tokyo",
+      "t30": "Go to detention",
+      "t31": "Chefchaouen",
+      "t32": "Marrakech",
+      "t33": "Vault",
+      "t34": "Casablanca",
+      "t35": "Rotterdam Harbor",
+      "t36": "Fortune",
+      "t37": "Abu Dhabi",
+      "t38": "Customs duty",
+      "t39": "Dubai"
+    },
+    "corners": {
+      "startCaption": "Collect your salary",
+      "detentionCaption": "Just passing",
+      "passing": "Passing by"
+    },
+    "info": {
+      "t00": "Collect {amount} each time you pass or land here.",
+      "t01": "The rose-red city carved into canyon walls by the Nabataeans.",
+      "t02": "Draw a Vault card and follow what it says.",
+      "t03": "A vast desert valley of red sand and sandstone mountains in southern Jordan.",
+      "t04": "Pay {amount} to the bank when you land here.",
+      "t05": "A trade port. The more harbors one player owns, the higher the rent every harbor collects.",
+      "t06": "A wild southern region of glaciers, steppe and jagged peaks.",
+      "t07": "Draw a Fortune card and follow what it says.",
+      "t08": "Argentina's capital, known for tango, wide avenues and café culture.",
+      "t09": "A chain of about 275 waterfalls on the border with Brazil.",
+      "t10": "If you are sent here, pay {fine}, roll doubles, or wait up to {turns} turns. Just passing costs nothing.",
+      "t11": "Ancient Thebes, home to Karnak Temple and the Valley of the Kings.",
+      "t12": "Rent = dice roll x 4 with one utility, x 10 with both.",
+      "t13": "A Mediterranean port founded by Alexander the Great, famed for its ancient lighthouse.",
+      "t14": "Egypt's capital on the Nile, close to the pyramids of Giza.",
+      "t15": "A trade port. The more harbors one player owns, the higher the rent every harbor collects.",
+      "t16": "A Mediterranean resort city set below the Taurus Mountains.",
+      "t17": "Draw a Vault card and follow what it says.",
+      "t18": "A region of fairy chimneys, cave dwellings and sunrise balloon flights.",
+      "t19": "The city that spans two continents across the Bosphorus.",
+      "t20": "A quiet rest stop. If the Oasis jackpot rule is on, you collect the pooled money.",
+      "t21": "Andalusia's capital, home to the Alcázar palace and flamenco.",
+      "t22": "Draw a Fortune card and follow what it says.",
+      "t23": "A Catalan coastal city known for Gaudí's architecture and the Sagrada Família.",
+      "t24": "Spain's capital, a hub of art museums and late-night life.",
+      "t25": "A trade port. The more harbors one player owns, the higher the rent every harbor collects.",
+      "t26": "Japan's former imperial capital, full of temples, shrines and wooden old quarters.",
+      "t27": "A port city famous for its street food and its castle.",
+      "t28": "Rent = dice roll x 4 with one utility, x 10 with both.",
+      "t29": "Japan's capital, a dense metropolis of neon districts and quiet shrines.",
+      "t30": "Move directly to Detention. You do not collect your salary.",
+      "t31": "The blue-washed mountain town in northern Morocco.",
+      "t32": "The red city of the Jemaa el-Fnaa square and busy souks.",
+      "t33": "Draw a Vault card and follow what it says.",
+      "t34": "Morocco's largest city, home to the Hassan II Mosque on the Atlantic coast.",
+      "t35": "A trade port. The more harbors one player owns, the higher the rent every harbor collects.",
+      "t36": "Draw a Fortune card and follow what it says.",
+      "t37": "The UAE capital, home to the Sheikh Zayed Grand Mosque.",
+      "t38": "Pay {amount} to the bank when you land here.",
+      "t39": "A Gulf city of record-breaking towers, including the Burj Khalifa."
+    },
+    "countries": {
+      "AR": "Argentina",
+      "JO": "Jordan",
+      "EG": "Egypt",
+      "TR": "Turkey",
+      "ES": "Spain",
+      "JP": "Japan",
+      "MA": "Morocco",
+      "AE": "United Arab Emirates"
+    },
+    "card": {
+      "close": "Close",
+      "set": "Set",
+      "when": "When",
+      "rent": "Rent",
+      "rows": {
+        "base": "Rent",
+        "h1": "With 1 house",
+        "h2": "With 2 houses",
+        "h3": "With 3 houses",
+        "h4": "With 4 houses",
+        "hotel": "With a hotel"
+      },
+      "stats": {
+        "price": "Price",
+        "house": "House",
+        "hotel": "Hotel",
+        "mortgage": "Mortgage value"
+      },
+      "doubleRent": "Own the whole set: base rent is doubled",
+      "buildEven": "Build houses evenly across the set. Four houses unlock a hotel.",
+      "buildAny": "Build houses on any property of a full set. Four houses unlock a hotel.",
+      "unowned": "Unowned",
+      "owner": "Owner",
+      "harborsOwned": "Harbors owned",
+      "harborCount": "{count, plural, one {# harbor} other {# harbors}}",
+      "jackpotNote": "The payment goes into the Oasis jackpot.",
+      "sheet": "Tile details",
+      "noRentDetention": "Owner in detention collects no rent"
+    }
+  },
+  "cards": {
+    "placeholder": "TODO"
+  },
+  "errors": {
+    "UNKNOWN": "Something went wrong.",
+    "ROOM_NOT_FOUND": "This room doesn't exist or was closed",
+    "ROOM_FULL": "This room is full",
+    "GAME_STARTED": "The game already started",
+    "RATE_LIMITED": "Too many attempts. Please wait a minute and try again.",
+    "NICKNAME_INVALID": "Use 1 to 16 letters, digits, spaces, _ or -.",
+    "NICKNAME_TAKEN": "That name is already used in this room.",
+    "CHARACTER_TAKEN": "Someone just picked that character. Choose another one.",
+    "NETWORK_ERROR": "Can't reach the server. Check your connection and try again.",
+    "NOT_HOST": "Only the host can change the settings.",
+    "MAX_PLAYERS_TOO_LOW": "There are already more players than that.",
+    "INTERNAL": "Something went wrong on the server. Try again.",
+    "NOT_YOUR_TURN": "It is not your turn.",
+    "WRONG_PHASE": "That move is not possible right now.",
+    "NEED_2_PLAYERS": "You need at least 2 players to start.",
+    "PLAYERS_NOT_READY": "Everyone must choose a character first.",
+    "GAME_ALREADY_STARTED": "The game has already started.",
+    "GAME_NOT_STARTED": "The game has not started yet.",
+    "DUPLICATE_ACTION": "That move was already played.",
+    "NOT_ALLOWED_IN_GAME": "Settings are locked once the game starts.",
+    "INSUFFICIENT_FUNDS": "Not enough cash.",
+    "SET_INCOMPLETE": "Own every property of this country to build.",
+    "NOT_OWNER": "You do not own that property.",
+    "MAX_LEVEL": "Maximum level reached.",
+    "HOTEL_NEEDS_4_HOUSES": "A hotel needs 4 houses.",
+    "MUST_PAY_TO_LEAVE": "You must pay the fine to leave detention.",
+    "VALIDATION_ERROR": "Something went wrong. Try again.",
+    "TRADE_INVALID": "That offer is not valid.",
+    "TRADE_NOT_FOUND": "That offer no longer exists.",
+    "TRADE_NOT_PENDING": "That offer was already answered.",
+    "NOT_TRADE_PARTY": "That offer is not yours to answer.",
+    "TRADE_HAS_BUILDINGS": "Properties with buildings cannot be traded.",
+    "TOO_MANY_TRADES": "You have too many open offers. Wait for an answer.",
+    "INVALID_TILE": "That property cannot be traded.",
+    "AUCTION_INVALID_BID": "That bid is not valid.",
+    "AUCTION_WITHDRAWN": "You withdrew from this auction.",
+    "UNEVEN_BUILD": "Build evenly across the set.",
+    "GROUP_MORTGAGED": "A mortgaged property blocks building on its set.",
+    "NOT_MORTGAGEABLE": "That property cannot be mortgaged.",
+    "NOT_MORTGAGED": "That property is not mortgaged.",
+    "MORTGAGE_DISABLED": "Mortgages are off in this game.",
+    "NOT_IN_DEBT": "You have no debt to pay.",
+    "TRADE_MORTGAGED": "Mortgaged properties cannot be traded."
+  },
+  "landing": {
+    "wordmark": {
+      "latin": "DEAL RUSH"
+    },
+    "tagline": "Buy. Bargain. Build. Outlast.",
+    "nicknameLabel": "Nickname",
+    "nicknamePlaceholder": "Your nickname",
+    "nicknameError": "Use 1 to 16 letters, digits, spaces, _ or -.",
+    "play": "Play now",
+    "createPrivate": "Create a private room",
+    "scrollCue": "Scroll to learn how to play",
+    "howTitle": "How a game unfolds",
+    "steps": {
+      "1": {
+        "title": "Everyone starts equal",
+        "body": "Each player begins with the same amount of cash, so the game is decided by choices, not a head start."
+      },
+      "2": {
+        "title": "Roll and move",
+        "body": "On your turn, roll the dice and travel around the board. A double earns you an extra roll."
+      },
+      "3": {
+        "title": "Claim properties",
+        "body": "Land on an unowned property and buy it. From then on, anyone who stops there pays you rent."
+      },
+      "4": {
+        "title": "Build to raise the stakes",
+        "body": "Own every property in a color group to unlock houses and hotels, and watch the rent climb."
+      },
+      "5": {
+        "title": "Outlast the table",
+        "body": "Trade, bargain and manage your cash. A player who cannot pay is out, and the last one standing wins."
+      }
+    },
+    "card": {
+      "label": "Sample property card",
+      "propertyName": "Placeholder Avenue",
+      "baseRent": "Base rent",
+      "house1": "1 house",
+      "house2": "2 houses",
+      "house3": "3 houses",
+      "house4": "4 houses",
+      "hotel": "Hotel",
+      "tiles": {
+        "a": "Placeholder Lane",
+        "b": "Surprise",
+        "c": "Placeholder Row"
+      }
+    },
+    "closingLine": "Last one standing wins.",
+    "theme": {
+      "toLight": "Switch to light theme",
+      "toDark": "Switch to dark theme"
+    },
+    "footer": {
+      "nav": "Footer",
+      "rules": "Rules",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "copyright": "© 2026 Deal Rush. All rights reserved.",
+      "disclaimer": "Deal Rush is an independent game, not affiliated with any other board game brand."
+    },
+    "meta": {
+      "title": "Deal Rush: a free online property-trading board game",
+      "description": "Buy, bargain, build and outlast your friends. Play Deal Rush free in your browser, no signup needed."
+    },
+    "micro": {
+      "free": "Free to play",
+      "noSignup": "No signup",
+      "players": "2 to 8 players"
+    },
+    "or": "or",
+    "howEyebrow": "How to play",
+    "howIntro": "Five simple ideas are all you need to get started.",
+    "stats": {
+      "eyebrow": "By the numbers",
+      "title": "The game at a glance",
+      "items": {
+        "1": {
+          "value": "2 to 8",
+          "label": "players"
+        },
+        "2": {
+          "value": "40",
+          "label": "tiles"
+        },
+        "3": {
+          "value": "8",
+          "label": "color sets"
+        },
+        "4": {
+          "value": "Free",
+          "label": "always"
+        }
+      }
+    },
+    "features": {
+      "eyebrow": "Features",
+      "title": "Built for a proper table",
+      "intro": "Everything a good game night needs, without the setup.",
+      "items": {
+        "1": {
+          "title": "Real-time rooms",
+          "body": "Everyone sees every move the instant it happens."
+        },
+        "2": {
+          "title": "Your rules",
+          "body": "Set starting cash, jail rules, auctions and turn timers for each room."
+        },
+        "3": {
+          "title": "Bots fill the table",
+          "body": "Short a player? A bot takes the empty seat so the game never waits."
+        },
+        "4": {
+          "title": "Fair by design",
+          "body": "The server rolls every die and checks every move, so nobody can cheat."
+        },
+        "5": {
+          "title": "Play anywhere",
+          "body": "Runs in your browser on desktop and mobile. Nothing to install."
+        },
+        "6": {
+          "title": "Trade and bargain",
+          "body": "Offer swaps, negotiate with rivals and strike deals mid-game."
+        }
+      }
+    },
+    "board": {
+      "eyebrow": "The board",
+      "title": "A board with its own character",
+      "body": "Forty tiles, eight color sets, surprise cards, and a jail you'll want to avoid."
+    },
+    "friends": {
+      "eyebrow": "With friends",
+      "title": "A room for your friends in seconds",
+      "intro": "No signup, no downloads. Just a link.",
+      "steps": {
+        "1": "Create a private room",
+        "2": "Share the link or code",
+        "3": "Wait for friends and start"
+      },
+      "codeLabel": "Room code",
+      "example": "Example"
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Questions, answered",
+      "intro": "Quick answers to the things people ask first.",
+      "items": {
+        "1": {
+          "q": "Do I need an account?",
+          "a": "No. Pick a nickname and play."
+        },
+        "2": {
+          "q": "How many people can play?",
+          "a": "From 2 to 8 players, and bots can fill any empty seat."
+        },
+        "3": {
+          "q": "Is it free?",
+          "a": "Yes, Deal Rush is free to play."
+        },
+        "4": {
+          "q": "How do I play with friends?",
+          "a": "Create a private room and share its link or code."
+        },
+        "5": {
+          "q": "What if I lose my connection?",
+          "a": "Reopen the page and rejoin the room to continue where you left off."
+        },
+        "6": {
+          "q": "Is it affiliated with other board games?",
+          "a": "No. Deal Rush is an independent game with its own board and identity."
+        }
+      }
+    },
+    "needNickname": "Enter a nickname to create or join a room.",
+    "closed": {
+      "expired": "Nobody joined within 2 minutes, so the room was closed.",
+      "allleft": "The room was closed because everyone left.",
+      "restart": "The server restarted, so the room was closed."
+    },
+    "dismiss": "Dismiss"
+  },
+  "play": {
+    "title": "Enter the Room ID",
+    "hint": "Ask the host for the 6-digit Room ID.",
+    "digit": "Digit {n} of 6",
+    "checking": "Checking the room...",
+    "back": "Back to home",
+    "retry": "Try again"
+  },
+  "trade": {
+    "title": "Trades",
+    "add": "New trade",
+    "empty": "No active trades",
+    "pickTitle": "Trade with",
+    "pickEmpty": "No other players to trade with",
+    "needsAnswer": "Needs your answer",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Declined",
+      "cancelled": "Cancelled"
+    },
+    "lands": "{count, plural, one {# property} other {# properties}}",
+    "nothing": "Nothing",
+    "open": "Open offer from {from} to {to}",
+    "dialog": {
+      "composeTitle": "Trade with {name}",
+      "viewTitle": "Offer from {from} to {to}",
+      "close": "Close",
+      "send": "Send offer",
+      "discard": "Discard",
+      "cancelOffer": "Cancel offer",
+      "accept": "Accept",
+      "reject": "Decline",
+      "budget": "Budget {amount}",
+      "youGive": "Cash you give",
+      "youAsk": "Cash you ask for",
+      "gives": "Gives {amount}",
+      "asks": "Asks for {amount}",
+      "properties": "Properties",
+      "noLands": "No properties yet",
+      "hasBuildings": "Has buildings, cannot be traded",
+      "summaryGive": "{name} gives",
+      "summaryGet": "{name} receives",
+      "sending": "Sending...",
+      "youLabel": "You"
+    },
+    "toast": {
+      "title": "{name} sent you a trade offer",
+      "view": "View",
+      "dismiss": "Dismiss"
+    },
+    "picker": {
+      "title": "Trade with...",
+      "close": "Close",
+      "empty": "No other players to trade with",
+      "bot": "Bot",
+      "properties": "{count, plural, one {# property} other {# properties}}",
+      "reasonAuction": "Not available during an auction",
+      "reasonDebt": "Not available while a debt is being settled"
+    }
+  },
+  "auction": {
+    "title": "Auction",
+    "listPrice": "List price {price}",
+    "currentBid": "Current bid",
+    "noBids": "No bids yet",
+    "timer": "Time left",
+    "seconds": "{seconds}s left",
+    "withdraw": "Withdraw",
+    "leading": "You are the highest bidder",
+    "outbid": "Outbid",
+    "withdrew": "You withdrew",
+    "yourCash": "Your cash {amount}",
+    "won": "{name} won {tile} for {price}",
+    "unsold": "No bids: {tile} stays unowned"
+  },
+  "debt": {
+    "bank": "the bank",
+    "owe": "You owe {amount} to {creditor}",
+    "cash": "Your cash {amount}. Mortgage properties to pay, or declare bankruptcy.",
+    "other": "{name} is raising funds",
+    "pay": "Pay debt",
+    "bankrupt": "Declare bankruptcy"
+  },
+  "mortgage": {
+    "mortgage": "Mortgage (+{amount})",
+    "unmortgage": "Unmortgage (-{amount})",
+    "badge": "Mortgaged",
+    "info": "Mortgaged: no rent and no building",
+    "hints": {
+      "NOT_MORTGAGEABLE": "Properties with buildings (or in a set with buildings) cannot be mortgaged",
+      "NOT_MORTGAGED": "This property is not mortgaged",
+      "INSUFFICIENT_FUNDS": "Not enough cash",
+      "NOT_YOUR_TURN": "Wait for your turn",
+      "WRONG_PHASE": "You cannot do that right now"
+    }
+  },
+  "oasis": {
+    "chip": "Jackpot {amount}",
+    "line": "Oasis jackpot: {amount}"
+  }
+}

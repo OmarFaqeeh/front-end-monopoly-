@@ -1,0 +1,1003 @@
+/* Room, board and loader styles: board unit, keyframes, patterns, layout areas. */
+
+/* Board unit: resolved once on the board grid (100cqw of the board), then inherited as a length. */
+@property --b {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+:root {
+  --dice-green: color-mix(in srgb, var(--brand) 55%, black);
+}
+
+/* ---------- Board ---------- */
+.tile-cell {
+  position: relative;
+  container-type: size;
+}
+.tile-portrait {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--b) * 0.006);
+  background-color: var(--surface-raised);
+}
+.tile-portrait.is-bottom {
+  flex-direction: column-reverse;
+}
+.tile-portrait.is-rot-left,
+.tile-portrait.is-rot-right {
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: 100cqh;
+  height: 100cqw;
+}
+.tile-portrait.is-rot-left {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.tile-portrait.is-rot-right {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.tile-framed {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.tile-diag {
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--accent) 7%, transparent) 0 1px,
+    transparent 1px 7px
+  );
+}
+.tile-interactive {
+  cursor: pointer;
+  transition: opacity 150ms ease-out;
+}
+.tile-interactive:hover {
+  opacity: 0.82;
+}
+.tile-interactive:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  z-index: 2;
+}
+.bars-motif {
+  display: flex;
+  gap: calc(var(--b) * 0.0045);
+}
+.bars-motif > span {
+  width: 1px;
+  height: calc(var(--b) * 0.03);
+  background: color-mix(in srgb, var(--ink-muted) 70%, transparent);
+}
+
+/* ---------- Idle motion ---------- */
+@keyframes float-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4%);
+  }
+}
+.float-idle {
+  animation: float-idle 3.6s ease-in-out infinite;
+}
+@keyframes shake-once {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+.shake-once {
+  animation: shake-once 420ms ease-in-out;
+}
+@keyframes bar-shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+.bar-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 33%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+  animation: bar-shimmer 1.2s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+.dot-pulse {
+  animation: dot-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-idle,
+  .shake-once,
+  .bar-shimmer::after,
+  .dot-pulse {
+    animation: none;
+  }
+  .tile-interactive {
+    transition: none;
+  }
+}
+
+/* ---------- Chat bubble: framed card with a double border and gold corner ornaments ---------- */
+.chat-bubble {
+  --tone: var(--accent);
+  position: relative;
+  padding: 8px 14px 6px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--tone) 60%, var(--line));
+  background: linear-gradient(155deg, color-mix(in srgb, var(--tone) 16%, var(--surface-raised)), var(--surface-raised) 70%);
+  box-shadow:
+    inset 0 0 0 3px var(--surface-raised),
+    inset 0 0 0 4px color-mix(in srgb, var(--tone) 30%, transparent),
+    0 2px 8px rgb(0 0 0 / 0.18);
+}
+.chat-bubble.is-mine {
+  --tone: var(--brand);
+}
+.chat-bubble::before,
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border: 0 solid var(--accent-strong);
+  pointer-events: none;
+}
+.chat-bubble::before {
+  top: -3px;
+  inset-inline-start: -3px;
+  border-top-width: 2px;
+  border-inline-start-width: 2px;
+  border-start-start-radius: 8px;
+}
+.chat-bubble::after {
+  bottom: -3px;
+  inset-inline-end: -3px;
+  border-bottom-width: 2px;
+  border-inline-end-width: 2px;
+  border-end-end-radius: 8px;
+}
+
+/* ---------- Room layout (grid areas) ---------- */
+.room-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "header"
+    "share"
+    "board"
+    "right"
+    "chat";
+}
+/* Phones, in a game: the board comes first, then the players and trades; sharing and chat move below. */
+@media (max-width: 767px) {
+  .room-grid {
+    gap: 14px;
+  }
+  .room-grid[data-ingame] {
+    grid-template-areas:
+      "header"
+      "board"
+      "right"
+      "chat"
+      "share";
+  }
+}
+.area-header {
+  grid-area: header;
+}
+.area-share {
+  grid-area: share;
+  min-width: 0;
+}
+.area-chat {
+  grid-area: chat;
+}
+.area-board {
+  grid-area: board;
+}
+.area-right {
+  grid-area: right;
+}
+@media (min-width: 768px) {
+  .room-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto minmax(260px, 1fr);
+    grid-template-areas:
+      "header header"
+      "board board"
+      "share right"
+      "chat right";
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .area-board {
+    --board-max: calc(100dvh - 9rem);
+  }
+}
+/* Landscape phones and short windows: board on the left (sized by the height), panels beside it. */
+@media (min-width: 640px) and (max-height: 600px) and (max-width: 1279px) {
+  .room-grid,
+  .room-grid[data-ingame] {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "header header"
+      "board right"
+      "share chat";
+  }
+  .area-board {
+    align-items: flex-start;
+    --board-max: calc(100dvh - 7.5rem);
+  }
+}
+@media (min-width: 1280px) {
+  .room-grid {
+    height: 100dvh;
+    grid-template-columns: 360px minmax(0, 1fr) 400px;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-areas:
+      "header board right"
+      "share board right"
+      "chat board right";
+  }
+  .area-right {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .area-right > * {
+    flex-shrink: 0;
+  }
+  /* Only the settings card scrolls, not the whole column. */
+  .area-right > .settings-card {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .area-chat {
+    min-height: 0;
+  }
+  .area-board {
+    min-height: 0;
+    overflow: auto;
+  }
+}
+
+/* ---------- Property tile: blurred flag backdrop ---------- */
+:root {
+  --flag-bd-op: 0.3;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --flag-bd-op: 0.38;
+  }
+}
+:root[data-theme="dark"] {
+  --flag-bd-op: 0.38;
+}
+.tile-surface {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--b) * 0.006);
+  background-color: var(--surface-raised);
+  overflow: hidden;
+  isolation: isolate;
+  contain: paint;
+}
+.tile-portrait.is-flat {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+.flag-backdrop {
+  position: absolute;
+  inset: -12%;
+  pointer-events: none;
+  opacity: calc(var(--flag-bd-op) * var(--flag-strength, 1));
+  filter: blur(6px) saturate(1.15);
+  -webkit-mask-image: linear-gradient(var(--outer-dir), black 0%, rgb(0 0 0 / 0.35) 100%);
+  mask-image: linear-gradient(var(--outer-dir), black 0%, rgb(0 0 0 / 0.35) 100%);
+  transition:
+    opacity 180ms ease-out,
+    filter 180ms ease-out;
+}
+.flag-backdrop > svg {
+  display: block;
+  transform: scale(1.37);
+}
+.tile-interactive:hover .flag-backdrop {
+  opacity: calc(0.45 * var(--flag-strength, 1));
+  filter: blur(3px) saturate(1.15);
+}
+.tile-interactive:hover:has(.flag-backdrop) {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flag-backdrop {
+    transition: none;
+  }
+}
+
+/* Property tile content. Sizes follow the board; small tiles (phones) degrade gracefully:
+   names may wrap inside a word instead of being cut, and the sharp badge hides under 34px tile width
+   (the blurred backdrop still shows the flag). */
+.pt-chip {
+  margin: 7cqw auto 0;
+  flex-shrink: 0;
+  padding: 0.15em 0.7em;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  background-color: color-mix(in srgb, var(--surface-raised) 80%, transparent);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: max(9px, calc(var(--b) * 0.0105));
+  white-space: nowrap;
+}
+.pt-name {
+  --fs-base: max(11px, calc(var(--b) * 0.013));
+  text-align: center;
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.15;
+  /* Never break inside a word; the font shrinks so the longest word fits the tile's short side. */
+  font-size: min(var(--fs-base), calc(86cqw / (var(--word, 8) * 0.62)));
+  text-shadow: 0 0 6px var(--surface-raised);
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: manual;
+}
+.pt-name.is-long {
+  --fs-base: max(9px, calc(var(--b) * 0.01));
+}
+.pt-badge {
+  display: flex;
+  flex-shrink: 0;
+  overflow: hidden;
+  width: 46cqw;
+  height: 46cqw;
+  margin: 0 auto 8cqw;
+  border-radius: 9999px;
+  box-shadow:
+    0 0 0 2px var(--surface-raised),
+    0 2px 6px rgb(0 0 0 / 0.3);
+}
+@container (max-width: 34px) {
+  .pt-chip {
+    margin-top: 3cqw;
+    padding: 0.1em 0.35em;
+    font-size: 8px;
+  }
+  .pt-badge {
+    display: none;
+  }
+}
+
+/* ---------- 3D die ---------- */
+/* Die colors are stated by the spec; hex is allowed here. */
+.die {
+  --die-a: #3b5646;
+  --die-b: #4a6b57;
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+}
+.die-shadow {
+  position: absolute;
+  inset-inline: 8%;
+  bottom: -16%;
+  height: 18%;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.38);
+  filter: blur(3px);
+  transition:
+    transform 1100ms ease-out,
+    opacity 1100ms ease-out,
+    filter 1100ms ease-out;
+}
+.die.is-air .die-shadow {
+  transform: scale(0.55);
+  opacity: 0.45;
+  filter: blur(8px);
+}
+.die-scene {
+  width: 100%;
+  height: 100%;
+  perspective: calc(var(--s) * 5);
+}
+.die.is-air .die-scene {
+  animation: die-toss 1100ms cubic-bezier(0.3, 0.1, 0.3, 1);
+}
+@keyframes die-toss {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-60px);
+  }
+  62% {
+    transform: translateY(0);
+  }
+  78% {
+    transform: translateY(-14px);
+  }
+  90% {
+    transform: translateY(0);
+  }
+}
+.die-tilt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(-24deg) rotateY(32deg);
+}
+.die-cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 1100ms cubic-bezier(0.2, 0.85, 0.25, 1);
+  will-change: transform;
+}
+.die-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 15%;
+  backface-visibility: hidden;
+  border-radius: 16%;
+  border: 1px solid rgb(246 226 176 / 0.55);
+  background-color: var(--die-a);
+  background-image: linear-gradient(145deg, var(--die-b), var(--die-a));
+  box-shadow:
+    inset 2px 2px 3px rgb(255 255 255 / 0.22),
+    inset -2px -2px 4px rgb(0 0 0 / 0.35);
+}
+/* One light from the top-left: top lightest, right mid, left darkest. */
+.die-face.f-top {
+  background-image:
+    linear-gradient(145deg, rgb(255 255 255 / 0.28), rgb(255 255 255 / 0.06)),
+    linear-gradient(145deg, var(--die-b), var(--die-a));
+  transform: rotateX(90deg) translateZ(calc(var(--s) / 2));
+}
+.die-face.f-front {
+  background-image:
+    linear-gradient(145deg, rgb(255 255 255 / 0.1), rgb(0 0 0 / 0.1)),
+    linear-gradient(145deg, var(--die-b), var(--die-a));
+  transform: rotateY(0deg) translateZ(calc(var(--s) / 2));
+}
+.die-face.f-right {
+  background-image:
+    linear-gradient(145deg, rgb(0 0 0 / 0.16), rgb(0 0 0 / 0.26)),
+    linear-gradient(145deg, var(--die-b), var(--die-a));
+  transform: rotateY(90deg) translateZ(calc(var(--s) / 2));
+}
+.die-face.f-left {
+  background-image:
+    linear-gradient(145deg, rgb(0 0 0 / 0.34), rgb(0 0 0 / 0.46)),
+    linear-gradient(145deg, var(--die-b), var(--die-a));
+  transform: rotateY(-90deg) translateZ(calc(var(--s) / 2));
+}
+.die-face.f-back {
+  background-image:
+    linear-gradient(145deg, rgb(0 0 0 / 0.28), rgb(0 0 0 / 0.4)),
+    linear-gradient(145deg, var(--die-b), var(--die-a));
+  transform: rotateY(180deg) translateZ(calc(var(--s) / 2));
+}
+.die-face.f-bottom {
+  background-image:
+    linear-gradient(145deg, rgb(0 0 0 / 0.4), rgb(0 0 0 / 0.5)),
+    linear-gradient(145deg, var(--die-b), var(--die-a));
+  transform: rotateX(-90deg) translateZ(calc(var(--s) / 2));
+}
+/* Inner cube: faces inset 2px and darker so edges and corners read as solid. */
+.die-face.die-core {
+  inset: 2px;
+  border: 0;
+  border-radius: 14%;
+  padding: 0;
+  background-image: none;
+  background-color: #2b4033;
+  box-shadow: none;
+}
+.die-face.die-core.f-top {
+  transform: rotateX(90deg) translateZ(calc(var(--s) / 2 - 3px));
+}
+.die-face.die-core.f-front {
+  transform: rotateY(0deg) translateZ(calc(var(--s) / 2 - 3px));
+}
+.die-face.die-core.f-right {
+  transform: rotateY(90deg) translateZ(calc(var(--s) / 2 - 3px));
+}
+.die-face.die-core.f-left {
+  transform: rotateY(-90deg) translateZ(calc(var(--s) / 2 - 3px));
+}
+.die-face.die-core.f-back {
+  transform: rotateY(180deg) translateZ(calc(var(--s) / 2 - 3px));
+}
+.die-face.die-core.f-bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--s) / 2 - 3px));
+}
+.die-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.die-pip {
+  display: block;
+  width: 72%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f6e2b0, #d9a24c);
+  box-shadow:
+    0 0 0 1.5px rgb(0 0 0 / 0.38),
+    inset 0 1px 1px rgb(0 0 0 / 0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  .die-cube,
+  .die-shadow {
+    transition: none;
+  }
+  .die.is-air .die-scene {
+    animation: none;
+  }
+  .die.is-air {
+    animation: die-fade 250ms ease-out;
+  }
+  .die.is-air .die-shadow {
+    transform: none;
+    opacity: 1;
+    filter: blur(3px);
+  }
+}
+@keyframes die-fade {
+  from {
+    opacity: 0.2;
+  }
+}
+
+.pt-badge.is-side {
+  width: 40cqw;
+  height: 40cqw;
+}
+/* A bought tile gives the plate room by shrinking the flag a little. */
+.pt-badge.is-owned {
+  width: 32cqw;
+  height: 32cqw;
+  margin-bottom: 5cqw;
+}
+.pt-badge.is-owned.is-side {
+  width: 28cqw;
+  height: 28cqw;
+}
+.pt-chip.pt-chip-tight {
+  margin-top: 2cqw;
+}
+
+/* Tiles as buttons, selection */
+.tile-btn {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  transition: transform 120ms ease-out;
+}
+.tile-selected {
+  transform: translateY(-2px);
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  z-index: 6;
+}
+.tile-selected:hover {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile-btn {
+    transition: none;
+  }
+}
+
+/* ---------- Characters ---------- */
+.char-shadow {
+  position: absolute;
+  inset-inline: 14%;
+  bottom: -2%;
+  height: 9%;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.28);
+  filter: blur(2px);
+}
+@keyframes char-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4%);
+  }
+}
+.char-float > span:last-child {
+  animation: char-float 3s ease-in-out infinite;
+}
+@keyframes char-bounce {
+  0% {
+    transform: scale(1, 1);
+  }
+  35% {
+    transform: scale(1.1, 0.88) translateY(4%);
+  }
+  70% {
+    transform: scale(0.96, 1.06) translateY(-4%);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.char-bounce {
+  transform-origin: 50% 100%;
+  animation: char-bounce 250ms ease-out;
+}
+@keyframes char-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(0);
+  }
+  96% {
+    transform: scaleY(1);
+  }
+}
+.char-eyelid {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  transform: scaleY(0);
+  animation: char-blink 5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .char-float > span:last-child,
+  .char-bounce,
+  .char-eyelid {
+    animation: none;
+  }
+}
+
+/* Start tile: on very small tiles (phones) the caption would wrap into the token zone, so it is only
+   exposed to assistive tech there; the label stays visible and the tokens keep their space. */
+@container (max-width: 56px) {
+  .start-caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Game: dice zoom, money floats, card flip, owner badge, pawn hop ---------- */
+.dice-stage {
+  transform-origin: 50% 40%;
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.dice-stage.is-zoomed {
+  transform: scale(1.35);
+}
+.dice-result {
+  transition: opacity 220ms ease;
+}
+
+.money-float {
+  animation: money-float 3200ms ease-in-out forwards;
+}
+@keyframes money-float {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  78% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+.money-flash-gain {
+  animation: money-flash-gain 3200ms ease-out;
+}
+.money-flash-loss {
+  animation: money-flash-loss 3200ms ease-out;
+}
+@keyframes money-flash-gain {
+  0% {
+    color: var(--success);
+  }
+  100% {
+    color: inherit;
+  }
+}
+@keyframes money-flash-loss {
+  0% {
+    color: var(--danger);
+  }
+  100% {
+    color: inherit;
+  }
+}
+
+.card-flip {
+  animation: card-flip 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-style: preserve-3d;
+}
+@keyframes card-flip {
+  from {
+    opacity: 0;
+    transform: perspective(700px) rotateY(-90deg) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(700px) rotateY(0) scale(1);
+  }
+}
+
+
+/* Each pawn hops once when it arrives on a tile (a step of the walk). */
+[data-pawn] > * {
+  animation: pawn-hop 650ms ease-in-out;
+}
+@keyframes pawn-hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-28%);
+  }
+}
+
+:root[data-motion="reduced"] .dice-stage,
+:root[data-motion="reduced"] .dice-result {
+  transition: none;
+}
+:root[data-motion="reduced"] .dice-stage.is-zoomed {
+  transform: none;
+}
+:root[data-motion="reduced"] .money-float {
+  display: none;
+}
+:root[data-motion="reduced"] .money-flash-gain,
+:root[data-motion="reduced"] .money-flash-loss {
+  animation-duration: 600ms;
+}
+:root[data-motion="reduced"] .card-flip {
+  animation: none;
+}
+:root[data-motion="reduced"] [data-pawn] > * {
+  animation: none;
+}
+
+/* ---------- Character color: picker hover tint and the glow behind a player's picture ---------- */
+.char-card:hover:not(:disabled),
+.char-card:focus-visible:not(:disabled) {
+  background-color: color-mix(in srgb, var(--c) 28%, var(--surface-sunken));
+  border-color: color-mix(in srgb, var(--c) 60%, var(--line));
+}
+.char-card[aria-checked="true"] {
+  background-color: color-mix(in srgb, var(--c) 34%, var(--surface-sunken));
+  border-color: var(--c);
+}
+.player-avatar {
+  background: radial-gradient(circle at 50% 52%, color-mix(in srgb, var(--c, transparent) 62%, transparent) 0%, color-mix(in srgb, var(--c, transparent) 26%, transparent) 58%, transparent 74%);
+}
+
+/* ---------- Owner plate: replaces the price on a bought tile ---------- */
+.owner-plate {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 78cqw;
+  height: 40cqw;
+  margin: 5cqw auto 0;
+  border-radius: 8cqw;
+  box-shadow:
+    inset 0 0 0 max(1px, 0.8cqw) rgb(255 255 255 / 0.28),
+    0 1px 4px rgb(0 0 0 / 0.35);
+}
+/* The picture sits on a light disc so it never blends into a plate of a similar color (pink hair on a pink plate). */
+.owner-plate-pic {
+  display: block;
+  width: 36cqw;
+  height: 36cqw;
+  padding: 1cqw;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgb(255 255 255 / 0.55) 0%, rgb(255 255 255 / 0.3) 62%, transparent 72%);
+}
+.owner-plate-pic.rot-left {
+  transform: rotate(90deg);
+}
+.owner-plate-pic.rot-right {
+  transform: rotate(-90deg);
+}
+@container (max-width: 34px) {
+  .owner-plate {
+    width: 84cqw;
+    height: 34cqw;
+    margin-top: 3cqw;
+  }
+  .owner-plate-pic {
+    width: 30cqw;
+    height: 30cqw;
+  }
+}
+
+/* ---------- Trades: the cash slider (like trimming a clip) and selected property chips ---------- */
+.trade-range {
+  --pct: 0%;
+  --c: var(--accent);
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.trade-range:disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+.trade-range::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--c) 0 var(--pct), color-mix(in srgb, var(--ink) 14%, transparent) var(--pct) 100%);
+}
+.trade-range::-moz-range-track {
+  height: 10px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--ink) 14%, transparent);
+}
+.trade-range::-moz-range-progress {
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--c);
+}
+.trade-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -6px;
+  border-radius: 9999px;
+  border: 3px solid var(--surface-raised);
+  background: var(--c);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.45);
+}
+.trade-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  border: 3px solid var(--surface-raised);
+  background: var(--c);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.45);
+}
+.trade-range:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+.trade-chip-selected {
+  border-color: var(--c);
+  background-color: color-mix(in srgb, var(--c) 24%, var(--surface-sunken));
+}
+
+/* ---------- Mortgaged tiles, Oasis jackpot chip, picker sheet ---------- */
+.mortgaged-overlay {
+  background: color-mix(in srgb, var(--ink) 32%, transparent);
+  backdrop-filter: grayscale(1);
+  -webkit-backdrop-filter: grayscale(1);
+}
+.mortgaged-badge {
+  margin-bottom: 8%;
+  padding: 0.1em 0.6em;
+  border-radius: 9999px;
+  background: var(--danger);
+  color: var(--surface-raised);
+  font-size: max(8px, calc(var(--b) * 0.0095));
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.oasis-chip {
+  padding: 0.1em 0.6em;
+  border-radius: 9999px;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--surface-raised) 88%, transparent);
+  color: var(--ink);
+  font-size: max(8px, calc(var(--b) * 0.0105));
+  font-weight: 700;
+  white-space: nowrap;
+}
+.picker-panel {
+  animation: picker-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes picker-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+:root[data-motion="reduced"] .picker-panel {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .picker-panel {
+    animation: none;
+  }
+}
+
+/* Tiles released after an inactivity removal: owner plate, houses and mortgage marks fade out before the tile turns unowned. */
+.tile-releasing .owner-plate,
+.tile-releasing .mortgaged-overlay,
+.tile-releasing [data-buildings] {
+  animation: tile-release 420ms ease-in forwards;
+}
+@keyframes tile-release {
+  to {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: grayscale(1);
+  }
+}

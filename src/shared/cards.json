@@ -1,0 +1,102 @@
+{
+ "fortune": [
+  {
+   "id": "F01",
+   "amount": -50
+  },
+  {
+   "id": "F02",
+   "amount": 120
+  },
+  {
+   "id": "F03",
+   "amount": 60
+  },
+  {
+   "id": "F04",
+   "amount": -100
+  },
+  {
+   "id": "F05",
+   "amount": 80
+  },
+  {
+   "id": "F06",
+   "amount": -70
+  },
+  {
+   "id": "F07",
+   "amount": 40
+  },
+  {
+   "id": "F08",
+   "amount": -30
+  },
+  {
+   "id": "F09",
+   "amount": 150
+  },
+  {
+   "id": "F10",
+   "amount": -120
+  },
+  {
+   "id": "F11",
+   "amount": 90
+  },
+  {
+   "id": "F12",
+   "amount": -40
+  }
+ ],
+ "vault": [
+  {
+   "id": "V01",
+   "amount": 200
+  },
+  {
+   "id": "V02",
+   "amount": 50
+  },
+  {
+   "id": "V03",
+   "amount": -60
+  },
+  {
+   "id": "V04",
+   "amount": 100
+  },
+  {
+   "id": "V05",
+   "amount": -50
+  },
+  {
+   "id": "V06",
+   "amount": 30
+  },
+  {
+   "id": "V07",
+   "amount": -80
+  },
+  {
+   "id": "V08",
+   "amount": 70
+  },
+  {
+   "id": "V09",
+   "amount": -40
+  },
+  {
+   "id": "V10",
+   "amount": 25
+  },
+  {
+   "id": "V11",
+   "amount": 45
+  },
+  {
+   "id": "V12",
+   "amount": -35
+  }
+ ]
+}

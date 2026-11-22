@@ -1,0 +1,98 @@
+[
+  {
+    "id": "c01",
+    "nameKey": "room.characters.c01",
+    "dominantColor": "#d88878",
+    "source": "art",
+    "file": "c01.png",
+    "color": "#4d4d58"
+  },
+  {
+    "id": "c02",
+    "nameKey": "room.characters.c02",
+    "dominantColor": "#e8b8a8",
+    "source": "art",
+    "file": "c02.png",
+    "color": "#e0b84e"
+  },
+  {
+    "id": "c03",
+    "nameKey": "room.characters.c03",
+    "dominantColor": "#482828",
+    "source": "art",
+    "file": "c03.png",
+    "color": "#b98a52"
+  },
+  {
+    "id": "c04",
+    "nameKey": "room.characters.c04",
+    "dominantColor": "#785858",
+    "source": "art",
+    "file": "c04.png",
+    "color": "#a9b4c0"
+  },
+  {
+    "id": "c05",
+    "nameKey": "room.characters.c05",
+    "dominantColor": "#e8c8b8",
+    "source": "art",
+    "file": "c05.png",
+    "color": "#a79bdc"
+  },
+  {
+    "id": "c06",
+    "nameKey": "room.characters.c06",
+    "dominantColor": "#d88868",
+    "source": "art",
+    "file": "c06.png",
+    "color": "#d0743c"
+  },
+  {
+    "id": "c07",
+    "nameKey": "room.characters.c07",
+    "dominantColor": "#685838",
+    "source": "art",
+    "file": "c07.png",
+    "color": "#6fae4a"
+  },
+  {
+    "id": "c08",
+    "nameKey": "room.characters.c08",
+    "dominantColor": "#d89888",
+    "source": "art",
+    "file": "c08.png",
+    "color": "#8e3b52"
+  },
+  {
+    "id": "c09",
+    "nameKey": "room.characters.c09",
+    "dominantColor": "#382828",
+    "source": "art",
+    "file": "c09.png",
+    "color": "#d94a4a"
+  },
+  {
+    "id": "c10",
+    "nameKey": "room.characters.c10",
+    "dominantColor": "#483838",
+    "source": "art",
+    "file": "c10.png",
+    "color": "#5a7a96"
+  },
+  {
+    "id": "c11",
+    "nameKey": "room.characters.c11",
+    "dominantColor": "#281818",
+    "source": "art",
+    "file": "c11.png",
+    "color": "#ee7f9a"
+  },
+  {
+    "id": "c12",
+    "nameKey": "room.characters.c12",
+    "dominantColor": "#281838",
+    "source": "art",
+    "file": "c12.png",
+    "color": "#6b62c9"
+  }
+]
