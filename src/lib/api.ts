@@ -1,5 +1,5 @@
 // REST client for the game server. No Supabase access from the browser: everything goes through the backend.
-export const BACKEND_URL = (process.env.NEXT_PUBLIC_BACKEND_URL ?? (process.env.NODE_ENV === "production" ? "https://back-end-monopoly-yaki.vercel.app" : "http://localhost:4000")).replace(/\/+$/, "");
+export const BACKEND_URL = (process.env.NEXT_PUBLIC_BACKEND_URL ?? (process.env.NODE_ENV === "production" ? "https://back-end-monopoly-1.onrender.com" : "http://localhost:4000")).replace(/\/+$/, "");
 
 /** Language-agnostic error from the server (or NETWORK_ERROR when it cannot be reached). */
 export class ApiError extends Error {
