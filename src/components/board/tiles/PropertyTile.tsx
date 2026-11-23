@@ -37,7 +37,7 @@ export default function PropertyTile({ tile, side, name, owner }: { tile: TileDa
         </span>
       </div>
 
-      {Flag && (
+      {Flag && owner && (
         <span className={`pt-badge${sideColumn ? " is-side" : ""}${owner ? " is-owned" : ""}`}>
           <Flag />
         </span>

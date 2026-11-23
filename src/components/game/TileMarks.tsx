@@ -11,19 +11,38 @@ const MARK_POS: Record<EdgeSide, CSSProperties> = {
   right: { left: "3%", top: 0, bottom: 0, flexDirection: "column" },
 };
 
+/** A little house: red roof with a chimney, cream walls, a door and two windows. */
 export function HouseIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="size-full drop-shadow-sm" aria-hidden="true">
-      <path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z" fill="var(--success)" stroke="var(--surface-raised)" strokeWidth="1.6" strokeLinejoin="round" />
+    <svg viewBox="0 0 32 30" className="size-full" aria-hidden="true">
+      <rect x="22" y="3" width="4" height="9" fill="#8a4b2d" stroke="#2b1b10" strokeWidth="1" />
+      <rect x="5" y="13" width="22" height="15" fill="#f6e6c4" stroke="#2b1b10" strokeWidth="1.2" />
+      <path d="M2 14.5 16 3l14 11.5z" fill="#c8402f" stroke="#2b1b10" strokeWidth="1.2" strokeLinejoin="round" />
+      <rect x="13.5" y="19" width="5" height="9" rx="0.6" fill="#7a4a21" stroke="#2b1b10" strokeWidth="0.8" />
+      <rect x="7" y="16.5" width="4.5" height="4.5" fill="#8ecae6" stroke="#2b1b10" strokeWidth="0.8" />
+      <rect x="20.5" y="16.5" width="4.5" height="4.5" fill="#8ecae6" stroke="#2b1b10" strokeWidth="0.8" />
     </svg>
   );
 }
 
+/** A hotel: a tall building with a banner, rows of windows, a canopy and the entrance. */
 export function HotelIcon() {
   return (
-    <svg viewBox="0 0 32 24" className="size-full drop-shadow-sm" aria-hidden="true">
-      <path d="M3 22V9l6-4 4 3 4-5 6 4 6-2v17z" fill="var(--accent-strong)" stroke="var(--surface-raised)" strokeWidth="1.4" strokeLinejoin="round" />
-      <path d="M9 12h3v3H9zm6 0h3v3h-3zm6 0h3v3h-3zM9 17h3v5H9zm12 0h3v5h-3z" fill="var(--surface-raised)" opacity="0.85" />
+    <svg viewBox="0 0 32 36" className="size-full" aria-hidden="true">
+      <path d="M16 1v6" stroke="#2b1b10" strokeWidth="1.1" />
+      <path d="M16 1.5h7l-2 2 2 2h-7z" fill="#e0a526" stroke="#2b1b10" strokeWidth="0.8" strokeLinejoin="round" />
+      <rect x="5" y="7" width="22" height="27" fill="#e9c46a" stroke="#2b1b10" strokeWidth="1.2" />
+      <rect x="3" y="5.5" width="26" height="3.5" fill="#8c2f39" stroke="#2b1b10" strokeWidth="1" />
+      <g fill="#8ecae6" stroke="#2b1b10" strokeWidth="0.7">
+        <rect x="8" y="11.5" width="4" height="4" />
+        <rect x="14" y="11.5" width="4" height="4" />
+        <rect x="20" y="11.5" width="4" height="4" />
+        <rect x="8" y="17.5" width="4" height="4" />
+        <rect x="14" y="17.5" width="4" height="4" />
+        <rect x="20" y="17.5" width="4" height="4" />
+      </g>
+      <rect x="11.5" y="25" width="9" height="9" rx="0.8" fill="#7a4a21" stroke="#2b1b10" strokeWidth="0.9" />
+      <rect x="9.5" y="23" width="13" height="2.4" fill="#8c2f39" stroke="#2b1b10" strokeWidth="0.8" />
     </svg>
   );
 }

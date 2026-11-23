@@ -879,14 +879,15 @@
 .owner-plate.has-building {
   gap: 2cqw;
   justify-content: space-evenly;
-  width: 88cqw;
-  height: 52cqw;
+  width: 92cqw;
+  height: 54cqw;
   margin-top: 3cqw;
   padding: 0 2cqw;
 }
 .owner-plate.has-building .owner-plate-pic {
-  width: 24cqw;
-  height: 24cqw;
+  width: 32cqw;
+  height: 32cqw;
+  padding: 1.5cqw;
 }
 .owner-build {
   display: flex;
@@ -896,15 +897,15 @@
 }
 .owner-build-icon {
   display: block;
-  width: 38cqw;
-  height: 38cqw;
+  width: 32cqw;
+  height: 30cqw;
 }
 .owner-build.is-hotel .owner-build-icon {
-  width: 50cqw;
+  width: 32cqw;
   height: 38cqw;
 }
 .owner-build-count {
-  font-size: 22cqw;
+  font-size: 18cqw;
   font-weight: 800;
   line-height: 1;
   color: #fff;
@@ -1048,4 +1049,39 @@
     transform: scale(0.85);
     filter: grayscale(1);
   }
+}
+
+/* Unowned property: the flag straddles the inner edge of the tile (half on the card, half outside). */
+.tile-flag-out {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  overflow: hidden;
+  width: calc(var(--b) * 0.044);
+  height: calc(var(--b) * 0.044);
+  border-radius: 9999px;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 max(2px, calc(var(--b) * 0.0025)) var(--surface-raised),
+    0 2px 8px rgb(0 0 0 / 0.45);
+}
+.tile-flag-out.is-top {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+.tile-flag-out.is-bottom {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.tile-flag-out.is-left {
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
+.tile-flag-out.is-right {
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

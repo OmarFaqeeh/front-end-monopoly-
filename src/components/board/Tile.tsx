@@ -9,6 +9,7 @@ import { ringCell, tileSide } from "@/lib/boardGrid";
 import { formatMoney } from "@/lib/money";
 import { useGameStore } from "@/store/gameStore";
 import { useRoomStore, type RoomPlayer } from "@/store/roomStore";
+import { FLAGS } from "./flags";
 import CornerTile from "./tiles/CornerTile";
 import PropertyTile from "./tiles/PropertyTile";
 import type { TileOwner } from "./tiles/OwnerPlate";
@@ -70,8 +71,15 @@ export default function Tile({
     body = <CardTile tile={tile} side={side} name={name} />;
   }
 
+  // Before the purchase the flag hangs over the tile's inner edge: half on the card, half outside, at full size.
+  const OutFlag = tile.kind === "property" && tile.flag && !ownerId && side !== "corner" ? FLAGS[tile.flag] : null;
   const overlays = (
     <>
+      {OutFlag && side !== "corner" && (
+        <span className={`tile-flag-out is-${side}`} data-flag-out="" aria-hidden="true">
+          <OutFlag />
+        </span>
+      )}
       {mortgaged && (
         <div className="mortgaged-overlay pointer-events-none absolute inset-0 z-10 flex items-end justify-center" data-mortgaged="">
           <span className="mortgaged-badge">{t("mortgage.badge")}</span>
