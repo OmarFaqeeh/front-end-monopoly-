@@ -16,6 +16,7 @@ function EmblemTile({ tile, side, name, owner }: { tile: TileData; side: EdgeSid
   const glow = `radial-gradient(circle at 50% 58%, color-mix(in srgb, var(${glowToken(tile)}) 35%, transparent) 0%, transparent 62%)`;
   const amount = tile.price ?? tile.amount;
   const fit = nameStyle(name);
+  const ownable = tile.kind === "harbor" || tile.kind === "utility";
 
   return (
     <TileFrame
@@ -25,16 +26,14 @@ function EmblemTile({ tile, side, name, owner }: { tile: TileData; side: EdgeSid
       style={{ backgroundImage: `${SCRIM}, ${glow}` }}
       backdrop={<EmblemBackdrop emblem={emblem} side={side} strength={KIND_BACKDROP_STRENGTH[tile.kind] ?? 1} />}
     >
-      <div className="flex shrink-0 flex-col items-center px-[4cqw] pt-[6cqw]">
-        <span className={`pt-name ${fit.className}`} style={fit.style}>
+      {/* Harbors and utilities (like the countries): the owner plate, or the price, sits ABOVE the name. */}
+      <div className={ownable ? `flex shrink-0 items-center px-[4cqw] ${side === "bottom" ? "flex-col-reverse" : "flex-col"}` : "flex shrink-0 flex-col items-center px-[4cqw] pt-[6cqw]"}>
+        {ownable &&
+          (owner ? <OwnerPlate owner={owner} side={side} /> : amount != null && <span className="pt-chip">{formatMoney(amount, { suffix: true })}</span>)}
+        <span className={`pt-name ${fit.className}`} style={ownable ? { ...fit.style, [side === "bottom" ? "marginBottom" : "marginTop"]: "4cqw" } : fit.style}>
           {name}
         </span>
-        {/* Harbors and utilities: once bought, the owner's plate replaces the price. */}
-        {owner ? (
-          <OwnerPlate owner={owner} side={side} />
-        ) : (
-          amount != null && <span className="pt-chip pt-chip-tight">{formatMoney(amount, { suffix: true })}</span>
-        )}
+        {!ownable && amount != null && <span className="pt-chip pt-chip-tight">{formatMoney(amount, { suffix: true })}</span>}
       </div>
       <div className="flex min-h-0 flex-1 items-center justify-center">
         <span className="block" style={{ width: owner ? "44cqw" : "60cqw", height: owner ? "44cqw" : "60cqw" }}>

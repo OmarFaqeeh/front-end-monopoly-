@@ -71,8 +71,8 @@ export default function Tile({
     body = <CardTile tile={tile} side={side} name={name} />;
   }
 
-  // Before the purchase the flag hangs over the tile's inner edge: half on the card, half outside, at full size.
-  const OutFlag = tile.kind === "property" && tile.flag && !ownerId && side !== "corner" ? FLAGS[tile.flag] : null;
+  // The flag always hangs over the tile's inner edge (bought or not): half on the card, half outside, at full size.
+  const OutFlag = tile.kind === "property" && tile.flag && side !== "corner" ? FLAGS[tile.flag] : null;
   const overlays = (
     <>
       {OutFlag && side !== "corner" && (

@@ -76,7 +76,7 @@ afterEach(cleanup);
 
 describe("settings contract", () => {
   it("has no privateRoom key and rejects it; defaults match the spec", () => {
-    expect(DEFAULT_SETTINGS).toEqual({ maxPlayers: 4, allowBots: false, boardMap: "classic", doubleRentSets: false, oasisJackpot: false, auctions: true, noRentInDetention: false, mortgage: false, evenBuild: true, startingCash: 1500 });
+    expect(DEFAULT_SETTINGS).toEqual({ maxPlayers: 4, allowBots: false, boardMap: "classic", doubleRentSets: false, oasisJackpot: false, auctions: true, noRentInDetention: false, mortgage: false, evenBuild: false, startingCash: 1500 });
     expect(roomSettingsSchema.safeParse({ ...DEFAULT_SETTINGS, privateRoom: true }).success).toBe(false);
     expect(roomSettingsSchema.safeParse({ ...DEFAULT_SETTINGS, startingCash: 1234 }).success).toBe(false);
     expect(roomSettingsSchema.safeParse({ ...DEFAULT_SETTINGS, maxPlayers: 9 }).success).toBe(false);

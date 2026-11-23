@@ -31,7 +31,7 @@ export const DEFAULT_SETTINGS: RoomSettings = {
   auctions: true,
   noRentInDetention: false,
   mortgage: false,
-  evenBuild: true,
+  evenBuild: false,
   startingCash: 1500,
 };
 
@@ -57,7 +57,7 @@ export const DEFAULT_RULES: GameRules = {
   auctions: true,
   noRentInDetention: false,
   mortgage: false,
-  evenBuild: true,
+  evenBuild: false,
 };
 
 export function rulesFromSettings(s: RoomSettings): GameRules {

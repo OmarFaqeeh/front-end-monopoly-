@@ -1,6 +1,5 @@
 // Property tile. Layers, back to front: surface, blurred flag backdrop, legibility scrim (background of
 // the content box), then price chip (outer edge), name, sharp flag badge and the group color strip (inner edge).
-import { FLAGS } from "@/components/board/flags";
 import FlagBackdrop from "@/components/board/FlagBackdrop";
 import type { TileData } from "@/config/boardLayout";
 import { formatMoney } from "@/lib/money";
@@ -13,9 +12,7 @@ const SCRIM =
 
 /** owner: once the tile is bought the price is replaced by a plate in the owner's color with their picture. */
 export default function PropertyTile({ tile, side, name, owner }: { tile: TileData; side: EdgeSide; name: string; owner?: TileOwner }) {
-  const Flag = tile.flag ? FLAGS[tile.flag] : null;
   const fit = nameStyle(name);
-  const sideColumn = side === "left" || side === "right";
 
   return (
     <TileFrame
@@ -36,12 +33,6 @@ export default function PropertyTile({ tile, side, name, owner }: { tile: TileDa
           {name}
         </span>
       </div>
-
-      {Flag && owner && (
-        <span className={`pt-badge${sideColumn ? " is-side" : ""}${owner ? " is-owned" : ""}`}>
-          <Flag />
-        </span>
-      )}
 
       <div className="shrink-0" style={{ height: "6cqw", backgroundColor: `var(--group-${tile.group})` }} />
     </TileFrame>
