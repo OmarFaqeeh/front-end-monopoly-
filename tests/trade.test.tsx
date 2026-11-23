@@ -164,6 +164,30 @@ describe("offer editor", () => {
   });
 });
 
+describe("trade details", () => {
+  it("each offer in the list names every property and the cash of both sides", () => {
+    show(game({ trades: [offer({ id: "T1", give: { tiles: [1, 3], cash: 100 }, get: { tiles: [8], cash: 50 } })] }));
+    wrap(<TradeCard />);
+    expect(document.querySelector("[data-trade-gives]")).toHaveTextContent("Omar gives: Petra, Wadi Rum, 100 $");
+    expect(document.querySelector("[data-trade-gets]")).toHaveTextContent("Sara gives: Buenos Aires, 50 $");
+  });
+
+  it("reopening an ACCEPTED land-for-land offer still shows both properties (they changed hands)", () => {
+    // after the deal: tile 1 belongs to Sara, tile 8 belongs to Omar
+    const g = game({ trades: [offer({ id: "T1", status: "accepted", give: { tiles: [1], cash: 0 }, get: { tiles: [8], cash: 0 } })] });
+    g.properties = { ...g.properties, 1: { ownerId: "b", level: 0 }, 8: { ownerId: "a", level: 0 } };
+    useRoomStore.setState({ meId: "a" });
+    show(g);
+    useGameStore.setState({ tradeUi: { kind: "view", tradeId: "T1" } });
+    wrap(<TradeDialog />);
+    const dialog = screen.getByRole("dialog");
+    expect(dialog.querySelector("[data-trade-tile='1']")).not.toBeNull();
+    expect(dialog.querySelector("[data-trade-tile='8']")).not.toBeNull();
+    expect(dialog.querySelector("[data-trade-side='mine'] [data-trade-tile='1']")).not.toBeNull(); // what Omar gave sits on his side
+    expect(dialog.querySelector("[data-trade-side='theirs'] [data-trade-tile='8']")).not.toBeNull();
+  });
+});
+
 describe("looking at an offer", () => {
   const view = (meId: string, o: TradeOffer = offer()) => {
     useRoomStore.setState({ meId });

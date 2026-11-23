@@ -1,6 +1,6 @@
 // Game connection logic: socket events -> game store (through the animation queue) and the player's actions.
 import type { Socket } from "socket.io-client";
-import type { BuildKind, GameEventsPayload, GameSnapshot, TradeSide } from "@/shared/events";
+import type { BuildKind, GameEventsPayload, GameSnapshot, TradeSide, TurnTimer } from "@/shared/events";
 import { useGameStore } from "@/store/gameStore";
 import { useRoomStore } from "@/store/roomStore";
 import { GameQueue } from "./gameQueue";
@@ -18,14 +18,26 @@ export const gameQueue = new GameQueue({
   system: (code, params) => useRoomStore.getState().addSystemMessage(code, params),
 });
 
+/** Remembers who is being timed, converted to the local clock (the server sent its own time). */
+function setTurnTimer(t: TurnTimer | null | undefined): void {
+  useGameStore.getState().patch({ turnTimer: t ? { playerId: t.playerId, endsAtLocal: t.endsAt - (t.serverNow - Date.now()) } : null });
+}
+
 /** Listens to the game events of the room socket. Safe to call again for a new socket. */
 export function attachGameListeners(socket: Socket): void {
-  socket.off("game:started").on("game:started", (p: { snapshot: GameSnapshot }) => {
+  socket.off("game:started").on("game:started", (p: { snapshot: GameSnapshot; turnTimer?: TurnTimer | null }) => {
     gameQueue.adopt(p.snapshot);
+    setTurnTimer(p.turnTimer);
     sound.play("start");
   });
-  socket.off("game:events").on("game:events", (p: GameEventsPayload) => gameQueue.push(p));
-  socket.off("game:sync").on("game:sync", (p: { snapshot: GameSnapshot }) => gameQueue.adopt(p.snapshot));
+  socket.off("game:events").on("game:events", (p: GameEventsPayload) => {
+    setTurnTimer(p.turnTimer);
+    gameQueue.push(p);
+  });
+  socket.off("game:sync").on("game:sync", (p: { snapshot: GameSnapshot; turnTimer?: TurnTimer | null }) => {
+    gameQueue.adopt(p.snapshot);
+    setTurnTimer(p.turnTimer);
+  });
 }
 
 /** Forget everything about the current game (entering or leaving a room). */

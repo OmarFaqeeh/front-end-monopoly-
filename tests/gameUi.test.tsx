@@ -276,7 +276,7 @@ describe("board marks", () => {
     const colorOf = (id: string) => (id === "a" ? "#4d4d58" : "#e0b84e");
     expect(strips.map((x) => x.style.backgroundColor).sort()).toEqual([colorOf("a"), colorOf("b")].map(toRgb).sort());
     // 3 houses on tile 6, a hotel on tile 39
-    expect(again.querySelector("[data-buildings='3']")?.querySelectorAll("svg")).toHaveLength(3);
+    expect(again.querySelector("[data-buildings='3']")).toHaveTextContent("3×");
     expect(again.querySelector("[data-buildings='hotel']")).not.toBeNull();
   });
 

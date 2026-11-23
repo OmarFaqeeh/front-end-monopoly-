@@ -231,6 +231,13 @@
 }
 .area-board {
   grid-area: board;
+  /* Breathing room around the board; overflow stays hidden so no scrollbar can appear under it. */
+  padding: 10px;
+}
+@media (min-width: 1280px) {
+  .area-board {
+    padding: 18px;
+  }
 }
 .area-right {
   grid-area: right;
@@ -296,7 +303,7 @@
   }
   .area-board {
     min-height: 0;
-    overflow: auto;
+    overflow: hidden;
   }
 }
 
@@ -868,6 +875,47 @@
 .owner-plate-pic.rot-right {
   transform: rotate(-90deg);
 }
+/* A plate with buildings: the picture shrinks a little and a big house (with its count) or hotel sits beside it. */
+.owner-plate.has-building {
+  gap: 2cqw;
+  justify-content: space-evenly;
+  width: 88cqw;
+  height: 52cqw;
+  margin-top: 3cqw;
+  padding: 0 2cqw;
+}
+.owner-plate.has-building .owner-plate-pic {
+  width: 24cqw;
+  height: 24cqw;
+}
+.owner-build {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.55));
+}
+.owner-build-icon {
+  display: block;
+  width: 38cqw;
+  height: 38cqw;
+}
+.owner-build.is-hotel .owner-build-icon {
+  width: 50cqw;
+  height: 38cqw;
+}
+.owner-build-count {
+  font-size: 22cqw;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.7);
+}
+.owner-build.rot-left {
+  transform: rotate(90deg);
+}
+.owner-build.rot-right {
+  transform: rotate(-90deg);
+}
 @container (max-width: 34px) {
   .owner-plate {
     width: 84cqw;
@@ -991,7 +1039,7 @@
 /* Tiles released after an inactivity removal: owner plate, houses and mortgage marks fade out before the tile turns unowned. */
 .tile-releasing .owner-plate,
 .tile-releasing .mortgaged-overlay,
-.tile-releasing [data-buildings] {
+.tile-releasing .owner-build {
   animation: tile-release 420ms ease-in forwards;
 }
 @keyframes tile-release {

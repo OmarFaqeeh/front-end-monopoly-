@@ -6,16 +6,17 @@ import { ArrowRight, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import PlayerAvatar from "@/components/room/PlayerAvatar";
 import Card from "@/components/ui/Card";
+import { BOARD_LAYOUT } from "@/config/boardLayout";
 import { formatMoney } from "@/lib/money";
 import type { TradeOffer, TradeSide } from "@/shared/events";
 import { useGameStore } from "@/store/gameStore";
 import { useRoomStore } from "@/store/roomStore";
 
+/** Everything one side gives, in words: property names and the cash, for example "Patagonia, Tokyo + 100 $". */
 function sideText(t: ReturnType<typeof useTranslations>, side: TradeSide): string {
-  const parts: string[] = [];
-  if (side.tiles.length) parts.push(t("trade.lands", { count: side.tiles.length }));
+  const parts: string[] = side.tiles.map((i) => t(BOARD_LAYOUT[i]!.nameKey));
   if (side.cash) parts.push(formatMoney(side.cash, { suffix: true }));
-  return parts.length ? parts.join(" + ") : t("trade.nothing");
+  return parts.length ? parts.join(", ") : t("trade.nothing");
 }
 
 export default function TradeCard() {
@@ -103,8 +104,13 @@ function TradeRow({ trade, meId, onOpen, t }: { trade: TradeOffer; meId: string 
             {t(`trade.status.${trade.status}`)}
           </span>
         </span>
-        <span className="mt-1 block truncate text-xs text-ink-muted">
-          {sideText(t, trade.give)} ⇄ {sideText(t, trade.get)}
+        <span className="mt-1.5 block text-xs leading-snug text-ink-muted" data-trade-summary="">
+          <span className="block" data-trade-gives="">
+            <b className="font-semibold text-ink">{t("trade.rowGives", { name: from?.nickname ?? "" })}</b> {sideText(t, trade.give)}
+          </span>
+          <span className="block" data-trade-gets="">
+            <b className="font-semibold text-ink">{t("trade.rowGives", { name: to?.nickname ?? "" })}</b> {sideText(t, trade.get)}
+          </span>
         </span>
         {needsMe && <span className="mt-1 block text-xs font-bold text-ink">{t("trade.needsAnswer")}</span>}
       </button>

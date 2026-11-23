@@ -3,7 +3,6 @@
 // carries the pawns standing on it, the owner badge and the building markers (all read from the displayed state).
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
-import { BuildingMarkers } from "@/components/game/TileMarks";
 import { accentColor } from "@/config/characters";
 import type { TileData } from "@/config/boardLayout";
 import { ringCell, tileSide } from "@/lib/boardGrid";
@@ -50,10 +49,9 @@ export default function Tile({
   const mortgaged = mortgagedText === "1";
   const owner = ownerId ? roomPlayers.find((p) => p.id === ownerId) : undefined;
   const level = Number(levelText);
-  const edge = side === "corner" ? null : side;
   // A bought tile shows the owner's plate (their color + picture) instead of the price. The owner may have left: accent color.
   const tileOwner: TileOwner | undefined = ownerId
-    ? { characterId: owner?.characterId ?? null, color: owner ? accentColor(owner.characterId ?? undefined) : "#d9a24c", label: t("game.build.ownedBy", { name: owner?.nickname ?? "" }) }
+    ? { characterId: owner?.characterId ?? null, color: owner ? accentColor(owner.characterId ?? undefined) : "#d9a24c", label: t("game.build.ownedBy", { name: owner?.nickname ?? "" }), level, buildLabel: level >= 5 ? t("board.card.rows.hotel") : level > 0 ? t("board.card.rows.h" + level) : "" }
     : undefined;
 
   let body: React.ReactNode;
@@ -83,9 +81,6 @@ export default function Tile({
         <span className="oasis-chip pointer-events-none absolute inset-x-0 bottom-[6%] z-10 mx-auto w-fit" data-oasis-chip={oasisPool}>
           {t("oasis.chip", { amount: formatMoney(oasisPool, { suffix: true }) })}
         </span>
-      )}
-      {edge && level > 0 && (
-        <BuildingMarkers side={edge} level={level} label={level >= 5 ? t("board.card.rows.hotel") : t("board.card.rows.h" + level)} />
       )}
     </>
   );

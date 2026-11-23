@@ -11,7 +11,7 @@ const MARK_POS: Record<EdgeSide, CSSProperties> = {
   right: { left: "3%", top: 0, bottom: 0, flexDirection: "column" },
 };
 
-function HouseIcon() {
+export function HouseIcon() {
   return (
     <svg viewBox="0 0 24 24" className="size-full drop-shadow-sm" aria-hidden="true">
       <path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z" fill="var(--success)" stroke="var(--surface-raised)" strokeWidth="1.6" strokeLinejoin="round" />
@@ -19,7 +19,7 @@ function HouseIcon() {
   );
 }
 
-function HotelIcon() {
+export function HotelIcon() {
   return (
     <svg viewBox="0 0 32 24" className="size-full drop-shadow-sm" aria-hidden="true">
       <path d="M3 22V9l6-4 4 3 4-5 6 4 6-2v17z" fill="var(--accent-strong)" stroke="var(--surface-raised)" strokeWidth="1.4" strokeLinejoin="round" />

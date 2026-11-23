@@ -161,7 +161,9 @@
     "turn": {
       "yours": "Your turn",
       "of": "{name}'s turn",
-      "waitingRoll": "Waiting for {name} to roll"
+      "waitingRoll": "Waiting for {name} to roll",
+      "idleAria": "{name} is removed if they do not play before this time",
+      "idleWarning": "Play now or you will be removed"
     },
     "roll": "Roll the dice",
     "youRolled": "You rolled {total}",
@@ -680,6 +682,7 @@
     },
     "lands": "{count, plural, one {# property} other {# properties}}",
     "nothing": "Nothing",
+    "rowGives": "{name} gives:",
     "open": "Open offer from {from} to {to}",
     "dialog": {
       "composeTitle": "Trade with {name}",

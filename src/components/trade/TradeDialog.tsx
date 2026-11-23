@@ -192,12 +192,11 @@ function Inner({
   };
 
   const mineTiles = useMemo(() => {
-    const all = ownedTiles(game, fromId);
-    return compose ? all : all.filter((x) => shownGive.tiles.includes(x.index));
+    // Viewing an offer lists exactly the properties written in it (they may have changed hands since: accepted offers).
+    return compose ? ownedTiles(game, fromId) : shownGive.tiles.map((index) => ({ index, level: game.properties[index]?.level ?? 0 }));
   }, [game, fromId, compose, shownGive.tiles]);
   const theirTiles = useMemo(() => {
-    const all = ownedTiles(game, toId);
-    return compose ? all : all.filter((x) => shownGet.tiles.includes(x.index));
+    return compose ? ownedTiles(game, toId) : shownGet.tiles.map((index) => ({ index, level: game.properties[index]?.level ?? 0 }));
   }, [game, toId, compose, shownGet.tiles]);
 
   const empty = shownGive.tiles.length + shownGet.tiles.length === 0 && shownGive.cash === 0 && shownGet.cash === 0;

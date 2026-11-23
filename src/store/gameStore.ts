@@ -71,6 +71,8 @@ interface GameState {
   jumping: string | null;
   /** Tiles fading out (released after an inactivity removal) before the display drops their owner. */
   releasing: number[];
+  /** Who must act and the local time (ms) when the idle removal happens; null when nobody is timed. */
+  turnTimer: { playerId: string; endsAtLocal: number } | null;
   /** Last error code of a rejected action (shown briefly near the buttons). */
   actionError: string | null;
 
@@ -102,6 +104,7 @@ const initial = {
   announce: null as Announcement | null,
   jumping: null as string | null,
   releasing: [] as number[],
+  turnTimer: null as { playerId: string; endsAtLocal: number } | null,
   actionError: null as string | null,
 };
 

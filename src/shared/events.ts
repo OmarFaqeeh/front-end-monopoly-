@@ -194,4 +194,12 @@ export interface GameEventsPayload {
   events: GameEvent[];
   snapshot: GameSnapshot;
   seq: number;
+  /** Who must act and by when (server clock); a player who does nothing by then is removed for inactivity. */
+  turnTimer?: TurnTimer | null;
+}
+
+export interface TurnTimer {
+  playerId: string;
+  endsAt: number;
+  serverNow: number;
 }
