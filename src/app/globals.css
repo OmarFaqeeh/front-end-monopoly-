@@ -129,6 +129,15 @@
 html {
   scroll-behavior: smooth;
 }
+/* The site never scrolls sideways: whatever sticks out of a section (backdrops, floating numbers, dice) is clipped. */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+.room-grid {
+  overflow-x: clip;
+}
 
 /* CSS entrance animations (server/client identical markup, so no hydration mismatch). */
 @keyframes enter-up {
