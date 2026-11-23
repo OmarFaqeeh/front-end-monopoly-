@@ -1,6 +1,12 @@
 // REST client for the game server. No Supabase access from the browser: everything goes through the backend.
 export const BACKEND_URL = (process.env.NEXT_PUBLIC_BACKEND_URL ?? (process.env.NODE_ENV === "production" ? "https://back-end-monopoly-1.onrender.com" : "http://localhost:4000")).replace(/\/+$/, "");
 
+/** Wakes a sleeping back-end (free hosts sleep when idle) while the player is still typing their name. */
+export function warmUpBackend(): void {
+  if (typeof window === "undefined") return;
+  void fetch(`${BACKEND_URL}/health`, { mode: "no-cors", cache: "no-store" }).catch(() => {});
+}
+
 /** Language-agnostic error from the server (or NETWORK_ERROR when it cannot be reached). */
 export class ApiError extends Error {
   constructor(

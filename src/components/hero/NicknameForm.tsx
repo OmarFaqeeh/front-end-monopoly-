@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
 import Button from "@/components/ui/Button";
 import { useRouter } from "@/i18n/navigation";
-import { ApiError, createRoom } from "@/lib/api";
+import { ApiError, createRoom, warmUpBackend } from "@/lib/api";
 import { saveCredentials } from "@/lib/roomSession";
 import { useUiStore } from "@/store/uiStore";
 
@@ -16,6 +16,11 @@ const NICKNAME = /^[\p{L}\p{M}\p{N} _-]{1,16}$/u;
 const needsNickname = () => new URLSearchParams(window.location.search).get("need") === "nickname";
 
 export default function NicknameForm() {
+  useEffect(() => {
+    warmUpBackend();
+    const id = setInterval(warmUpBackend, 4 * 60_000);
+    return () => clearInterval(id);
+  }, []);
   const t = useTranslations("landing");
   const te = useTranslations("errors");
   const router = useRouter();
